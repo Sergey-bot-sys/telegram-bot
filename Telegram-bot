@@ -1,6 +1,10 @@
 import telebot
 import config
 main = telebot.TeleBot(config.TOKEN)
+
+@main.message_handler(commands=['start'])
+def welcome(message):
+    main.send_message(message.chat.id, "Привет, я бот почты России", parse_mode='html')
 @main.message_handler(content_types=['text'])
 def func(message):
     main.send_message(message.chat.id, message.text)
