@@ -1,8 +1,7 @@
 import telebot
 import config
-bot = telebot.Telebot(config.TOKEN)
-@bot.massage_handler(content_types=['text'])
-def func(massage)
-    bot.send_massage(massage.chat.id, massage.text)
-bot.polling(none_stop=True)
-
+main = telebot.TeleBot(config.TOKEN)
+@main.message_handler(content_types=['text'])
+def func(message):
+    main.send_message(message.chat.id, message.text)
+main.polling(none_stop=True)
