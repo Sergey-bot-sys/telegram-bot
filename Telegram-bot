@@ -1,11 +1,24 @@
 import telebot
 import config
+
+from telebot import types
+
 main = telebot.TeleBot(config.TOKEN)
 
 @main.message_handler(commands=['start'])
 def welcome(message):
-    main.send_message(message.chat.id, "Привет, я бот почты России", parse_mode='html')
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    item1 = types.KeyboardButton("Узнать номер посылки")
+    item2 = types.KeyboardButton("Узнать адрес доставки")
+    markup.add(item1, item2)
+    main.send_message(message.chat.id, "Привет, я бот почты России", parse_mode='html', reply_markup=markup)
 @main.message_handler(content_types=['text'])
 def func(message):
-    main.send_message(message.chat.id, message.text)
+    if message.chat.type == 'private':
+        if message.text == 'Узнать номер посылки':
+            main.send_message(message.chat.id, '12345') #здесь должны быть данные из базы данных, временное решение
+        if message.text == 'Узнать адрес доставки':
+            main.send_message(message.chat.id, 'адрес, ул.Пушкина дом колотушкина') #здесь должны быть данные из базы данных, #здесь должны быть данные из базы данных
+
+
 main.polling(none_stop=True)
