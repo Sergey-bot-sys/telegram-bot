@@ -10,15 +10,19 @@ def welcome(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("Узнать номер посылки")
     item2 = types.KeyboardButton("Узнать адрес доставки")
-    markup.add(item1, item2)
+    item3 = types.KeyboardButton("Где моя посылка?")
+    markup.add(item1, item2, item3)
     main.send_message(message.chat.id, "Привет, я бот почты России", parse_mode='html', reply_markup=markup)
 @main.message_handler(content_types=['text'])
 def func(message):
     if message.chat.type == 'private':
         if message.text == 'Узнать номер посылки':
-            main.send_message(message.chat.id, '12345') #здесь должны быть данные из базы данных, временное решение
+            main.send_message(message.chat.id, '3009583')
         if message.text == 'Узнать адрес доставки':
-            main.send_message(message.chat.id, 'адрес, ул.Пушкина дом колотушкина') #здесь должны быть данные из базы данных, #здесь должны быть данные из базы данных
-
+            main.send_message(message.chat.id, 'адрес, ул.Пушкина дом колотушкина')
+        if message.text == 'Где моя посылка?':
+            main.send_message(message.chat.id, 'Ваша посылка ещё в пути')
+        #else:
+            #main.send_message(message.chat.id, 'что ты от меня ещё хочешь?')
 
 main.polling(none_stop=True)
