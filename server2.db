@@ -1,8 +1,6 @@
 import sqlite3
 from random import randint
 
-global db
-global sql
 
 db = sqlite3.connect('server.db')
 sql = db.cursor()
@@ -59,3 +57,15 @@ main()
 print("_________________________________")
 for value in sql.execute("SELECT * FROM users"):
     print(value)
+
+def get_connection():
+    global _connection
+    if _connection is None:
+        _connection = sqlite3.connect('server.db')
+    return _connection
+
+def add_message(login: str, password: str):
+    conn = get_connection()
+    c = conn.cursor()
+    sql.execute('INSERT INTO users (login, password) VALUES (?, ?)', (login, password))
+    conn.commit()
