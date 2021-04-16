@@ -28,7 +28,7 @@ def func(message):
     if message.chat.type == 'private':
         if message.text == 'Узнать номер посылки':
             main.send_message(message.chat.id,
-                              f'все данные' + str(sql.execute('SELECT login FROM users ' ).fetchall()))
+                              f'все данные' + str(sql.execute("SELECT login FROM users " ).fetchall()))
 
             print(str(chatid) + ' Кнопки меню отправлены')
             main.send_message(message.chat.id,
