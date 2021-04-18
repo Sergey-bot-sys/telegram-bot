@@ -22,13 +22,14 @@ def welcome(message):
 @main.message_handler(content_types=['text'])
 def func(message):
 
-    data = sqlite3.connect('server.db')
+     data = sqlite3.connect('server.db')
     sql = data.cursor()
-
+    user_zakaz = message.text
     if message.chat.type == 'private':
-        if message.text == 'Узнать номер посылки':
-            main.send_message(message.chat.id,
-                              f'все данные' + str(sql.execute("SELECT login FROM users " ).fetchall()))
+
+            if message.text == user_zakaz:
+                main.send_message(message.chat.id,
+                                    str(sql.execute(f"SELECT Адрес_доставки FROM Доставка Where Номер_заказа = '{user_zakaz}' ").fetchall()))
 
             #print(str(chatid) + ' Кнопки меню отправлены')
             main.send_message(message.chat.id,
