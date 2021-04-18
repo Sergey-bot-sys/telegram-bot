@@ -31,10 +31,8 @@ def func(message):
                 main.send_message(message.chat.id,
                                     str(sql.execute(f"SELECT Адрес_доставки FROM Доставка Where Номер_заказа = '{user_zakaz}' ").fetchall()))
 
-            #print(str(chatid) + ' Кнопки меню отправлены')
             main.send_message(message.chat.id,
                                 f'все данные' + str(sql.execute('SELECT password FROM users').fetchall()))
-            #print(str(chatid) + ' Кнопки меню отправлены')
         if message.text == 'Узнать адрес доставки':
             main.send_message(message.chat.id, 'адрес, ул.Пушкина дом колотушкина')
         if message.text == 'Где моя посылка?':
