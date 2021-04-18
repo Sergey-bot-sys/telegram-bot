@@ -8,7 +8,7 @@ sql = data.cursor()
 
 @main.message_handler(commands=['start'])
 def welcome(message):
-    chatid = message.chat.id
+    #chatid = message.chat.id
     data = sqlite3.connect('server.db')
     sql = data.cursor()
     #sql.execute('SELECT login FROM users WHERE login = ? ', (chatid,))
@@ -21,7 +21,7 @@ def welcome(message):
 
 @main.message_handler(content_types=['text'])
 def func(message):
-    chatid = message.chat.id
+
     data = sqlite3.connect('server.db')
     sql = data.cursor()
 
@@ -30,10 +30,10 @@ def func(message):
             main.send_message(message.chat.id,
                               f'все данные' + str(sql.execute("SELECT login FROM users " ).fetchall()))
 
-            print(str(chatid) + ' Кнопки меню отправлены')
+            #print(str(chatid) + ' Кнопки меню отправлены')
             main.send_message(message.chat.id,
                                 f'все данные' + str(sql.execute('SELECT password FROM users').fetchall()))
-            print(str(chatid) + ' Кнопки меню отправлены')
+            #print(str(chatid) + ' Кнопки меню отправлены')
         if message.text == 'Узнать адрес доставки':
             main.send_message(message.chat.id, 'адрес, ул.Пушкина дом колотушкина')
         if message.text == 'Где моя посылка?':
@@ -41,5 +41,5 @@ def func(message):
         #else:
             #main.send_message(message.chat.id, 'что ты от меня ещё хочешь?')
 
-if __name__ == "__main__":
-    main.polling(none_stop=True)
+
+main.polling(none_stop=True)
