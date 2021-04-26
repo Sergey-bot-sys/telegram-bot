@@ -8,7 +8,7 @@ sql = data.cursor()
 
 @main.message_handler(commands=['start'])
 def welcome(message):
-    data = sqlite3.connect('server.db')
+   data = sqlite3.connect('server.db')
     sql = data.cursor()
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("Узнать номер посылки для почты")
@@ -16,7 +16,7 @@ def welcome(message):
     item3 = types.KeyboardButton("Где моя посылка?")
     markup.add(item1, item2, item3)
     main.send_message(message.chat.id, "Привет, я бот почты России, если ты хочешь узнать подробности о своей доставки, то введи свой номер заказа"
-                                       " и пароль, и я тебе выдам информацию о посылке в ином случае я тебя зарегистрирую", parse_mode='html', reply_markup=markup)
+                                       , parse_mode='html', reply_markup=markup)
 
 
 
