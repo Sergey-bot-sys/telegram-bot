@@ -1,6 +1,8 @@
 import sqlite3
 import telebot
 import config
+from telebot import types
+
 main = telebot.TeleBot(config.TOKEN)
 data = sqlite3.connect('server.db')
 sql = data.cursor()
@@ -8,7 +10,7 @@ sql = data.cursor()
 
 @main.message_handler(commands=['start'])
 def welcome(message):
-   data = sqlite3.connect('server.db')
+    data = sqlite3.connect('server.db')
     sql = data.cursor()
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("Узнать номер посылки для почты")
@@ -21,25 +23,27 @@ def welcome(message):
 
 
 
-
 @main.message_handler(content_types=['text'])
 def func(message):
-
-     data = sqlite3.connect('server.db')
+    data = sqlite3.connect('server.db')
     sql = data.cursor()
     user_zakaz = message.text
     if message.text == user_zakaz:
         main.send_message(message.chat.id,
-                          str(sql.execute(
+                          f"Адрес доставки " + str(sql.execute(
                               f"SELECT Адрес_доставки FROM Доставка Where Номер_заказа = '{user_zakaz}' ").fetchall()[0]))
     if message.text == user_zakaz:
         main.send_message(message.chat.id,
-                          str(sql.execute(
+                          f"Статус - " + str(sql.execute(
                               f"SELECT Статус FROM Доставка Where Номер_заказа = '{user_zakaz}' ").fetchall()[0]))
+    if message.text == user_zakaz:
+        main.send_message(message.chat.id,
+                         f"Местоположение - " + str(sql.execute(
+                              f"SELECT Местоположение FROM Посылка Where Номер_заказа = '{user_zakaz}' ").fetchall()[0]))
+
     if message.text == user_zakaz:
         main.send_message(message.chat.id,
                            'С этим номером Вы забираете посылку - '+
                                 f"{user_zakaz} ")
-
 
 main.polling(none_stop=True)
