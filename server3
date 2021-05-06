@@ -42,6 +42,7 @@ sql.execute("""CREATE TABLE IF NOT EXISTS Посылка(
     Местоположение TEXT,
     Контактный_номер INTEGER,
     Адрес_доставки TEXT,
+    Номер_заказа INTEGER,
     FOREIGN KEY(Адрес_доставки) REFERENCES Получатель(Адрес_доставки),
     PRIMARY KEY("Контактный_номер")
 )""")
