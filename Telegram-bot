@@ -13,10 +13,10 @@ def welcome(message):
     data = sqlite3.connect('server.db')
     sql = data.cursor()
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton("Узнать номер посылки для почты")
-    item2 = types.KeyboardButton("Узнать адрес доставки")
-    item3 = types.KeyboardButton("Где моя посылка?")
-    markup.add(item1, item2, item3)
+    #item1 = types.KeyboardButton("Узнать номер посылки для почты")
+    #item2 = types.KeyboardButton("Узнать адрес доставки")
+    #item3 = types.KeyboardButton("Где моя посылка?")
+    #markup.add(item1, item2, item3)
     main.send_message(message.chat.id, "Привет, я бот почты России, если ты хочешь узнать подробности о своей доставки, то введи свой номер заказа"
                                        , parse_mode='html', reply_markup=markup)
 
